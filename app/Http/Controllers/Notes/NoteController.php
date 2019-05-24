@@ -27,7 +27,7 @@ class NoteController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => '',
+            'data' => $note->toArray(),
             'message' => 'Note Created Successfully',
         ]);
     }
