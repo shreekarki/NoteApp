@@ -8,6 +8,11 @@ use App\Http\Requests\Notes\StoreRequest;
 
 class NoteController extends Controller
 {
+    /**
+     *
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function notes()
     {
         $notes = Note::all();
@@ -18,6 +23,12 @@ class NoteController extends Controller
         ]);
     }
 
+    /**
+     *
+     *
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createNote(StoreRequest $request)
     {
         $note = Note::create([
@@ -32,6 +43,12 @@ class NoteController extends Controller
         ]);
     }
 
+    /**
+     *
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function deleteNote($id)
     {
         if(Note::destroy($id)) {
@@ -42,6 +59,12 @@ class NoteController extends Controller
         }
     }
 
+    /**
+     *
+     *
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateNote(StoreRequest $request)
     {
         //update note
