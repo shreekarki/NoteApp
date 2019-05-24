@@ -23,14 +23,22 @@
                 this.$emit('noteChosen',note);
             },
             remove: function(note,index){
-                this.notes.splice(index,1);
+                axios.delete('api/notes/delete/'+note.id).then((res)=>{
+                    console.log(res.data);
+                    this.notes.splice(index,1);
+                })
             },
             createNote:function(){
-                this.notes.push({
+                axios.post('/api/notes/create', {
                     title:'What\' on your mind',
                     content:'Say something Nice'
-                });
+                }).then((res) => {
+                    this.notes.push({
+                        title:'What\' on your mind',
+                        content:'Say something Nice'
+                    });
+                })
             }
-        }
+        },
     }
 </script>
