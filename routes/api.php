@@ -17,8 +17,8 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::get('/notes',['as'=>'noteGet','uses'=>'NoteController@notes']);
-Route::post('/notes/create',['as'=>'noteCreate','uses'=>'NoteController@createNote']);
-Route::delete('/notes/delete/{id}',['as'=>'noteControl','uses'=>'NoteController@deleteNote']);
-Route::put('/notes/update/{id}',['as'=>'noteControl','uses'=>'NoteController@updateNote']);
+Route::get('/notes',['as'=>'noteGet','uses'=>'Notes\NoteController@notes']);
+Route::post('/notes/create',['as'=>'noteCreate','uses'=>'Notes\NoteController@createNote']);
+Route::delete('/notes/delete/{id}',['as'=>'noteControl','uses'=>'Notes\NoteController@deleteNote']);
+Route::put('/notes/update/{id}',['as'=>'noteControl','uses'=>'Notes\NoteController@updateNote']);
 

@@ -22,3 +22,11 @@ script:
   - phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
   - npm run production
   - jshint resources/assets/js/modules/*
+
+notifications:
+  slack:
+    on_success: never
+    on_fail: always
+  email:
+    - one@example.com
+    - other@example.com

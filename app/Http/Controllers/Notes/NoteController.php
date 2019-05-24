@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Notes;
 
+use App\Models\Note;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Notes\StoreRequest;
 
-class NotesController extends Controller
+class NoteController extends Controller
 {
     public function notes()
     {
@@ -16,7 +18,7 @@ class NotesController extends Controller
         ]);
     }
 
-    public function createNote(Request $request)
+    public function createNote(StoreRequest $request)
     {
         $note = Note::create([
             'title' => $request->title,
@@ -40,7 +42,7 @@ class NotesController extends Controller
         }
     }
 
-    public function updateNote(Request $request)
+    public function updateNote(StoreRequest $request)
     {
         //update note
         $note = Note::where('id', $request);
