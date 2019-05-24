@@ -9,6 +9,7 @@
             <div class="add-note" @click="createNote">New Note?</div>
         </div>
     </div>
+    <div class="col-md-12"><span class="user-logged" style="cursor:pointer" @click="Logout">Logout</span></div>
 </template>
 <script>
     export default{
@@ -39,6 +40,13 @@
                     });
                 })
             }
+        },
+        Logout:function () {
+            axios.post('logout').then(response => {
+                location.reload();
+            }).catch(error => {
+                location.reload();
+            })
         },
     }
 </script>

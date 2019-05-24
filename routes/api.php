@@ -17,8 +17,11 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::get('/notes',['as'=>'noteGet','uses'=>'Notes\NoteController@notes']);
-Route::post('/notes/create',['as'=>'noteCreate','uses'=>'Notes\NoteController@createNote']);
-Route::delete('/notes/delete/{id}',['as'=>'noteControl','uses'=>'Notes\NoteController@deleteNote']);
-Route::put('/notes/update/{id}',['as'=>'noteControl','uses'=>'Notes\NoteController@updateNote']);
+Route::group(['middleware'=>'auth:api'],function(){
+    Route::get('/notes',['as'=>'noteGet','uses'=>'Notes\NoteController@notes']);
+    Route::post('/notes/create',['as'=>'noteCreate','uses'=>'Notes\NoteController@createNote']);
+    Route::delete('/notes/delete/{id}',['as'=>'noteControl','uses'=>'Notes\NoteController@deleteNote']);
+    Route::put('/notes/update/{id}',['as'=>'noteControl','uses'=>'Notes\NoteController@updateNote']);
+});
+
 

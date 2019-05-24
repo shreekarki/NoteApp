@@ -11,6 +11,20 @@
     import axios from 'axios';
     export default{
         props:['note'],
+        methods:{
+
+        },
+        mounted(){
+            setInterval(() => {
+                axios.put('/api/notes/update'+ this.note.id, {
+                    id:this.note.id,
+                    title:this.note.title,
+                    content:this.note.content,
+                }).then((res) => {
+                    console.log(res.data);
+                });
+            }, 4000)
+        },
         data:() => ({
         }),
         created(){
