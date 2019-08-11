@@ -1,8 +1,23 @@
 
-// sth
-// sth more
-// hj
-// hji
-// hjhsdf
-// sjgd
-// afashttp://914066aa.ngrok.io
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
