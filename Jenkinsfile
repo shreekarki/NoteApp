@@ -2,7 +2,7 @@
 node('master') {
     try {
         notifyBuild('STARTED')
-        stage('build') {
+        stage('setup') {
             // Checkout the app at the given commit sha from the webhook
             checkout scm
             // Install dependencies, create a new .env file and generate a new key, just for testing
