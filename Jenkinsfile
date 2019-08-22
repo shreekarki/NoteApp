@@ -10,7 +10,7 @@ node('master') {
             sh "touch -a database/testing.sqlite"
             sh "cp .env.pipelines .env"
             sh "php artisan key:generate --force"
-            sh "php artisan jwt:secret --force"
+           // sh "php artisan jwt:secret --force"
         }
         stage('quality') {
             sh "./vendor/bin/phpcs"
