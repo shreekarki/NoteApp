@@ -18,9 +18,9 @@ node('master') {
         }
         stage('quality') {
             sh "./vendor/bin/phpcs"
-            sh "./vendor/bin/phpmd"  
+            sh "./vendor/bin/phpmd"
         }
-       
+
         stage('deploy') {
             // If we had ansible installed on the server, setup to run an ansible playbook
             // sh "ansible-playbook -i ./ansible/hosts ./ansible/deploy.yml"
@@ -61,11 +61,11 @@ def notifyBuild(String buildStatus = 'STARTED') {
   }
 
   // Send notifications
-   slackSend channel: '#build',
+   slackSend channel: '#general',
              color: colorCode,
              message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
-    
-    
+
+
   emailext(
       subject: subject,
       body: details,
