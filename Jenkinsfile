@@ -64,12 +64,4 @@ def notifyBuild(String buildStatus = 'STARTED') {
    slackSend channel: '#general',
              color: colorCode,
              message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
-
-
-  emailext(
-      subject: subject,
-      body: details,
-      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-      
-    )
 }
