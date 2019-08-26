@@ -21,6 +21,7 @@ node('master') {
           //  sh "./vendor/bin/phpmd"
         }
         stage ('continuous delivery') {
+         input message: 'Finished cheking the PR proceed to merging to staging branch? (Click "Proceed" to continue)'
          sh "echo 'WE ARE Delivering'"
         }
         stage('deploy') {
