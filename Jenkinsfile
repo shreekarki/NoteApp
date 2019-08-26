@@ -24,6 +24,7 @@ node('master') {
          sh "echo 'WE ARE Delivering'"
         }
         stage('deploy') {
+            input message: 'Finished using the web site? (Click "Proceed" to continue)'
             // If we had ansible installed on the server, setup to run an ansible playbook
             // sh "ansible-playbook -i ./ansible/hosts ./ansible/deploy.yml"
             sh "echo 'WE ARE DEPLOYING'"
