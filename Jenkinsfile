@@ -14,11 +14,11 @@ node('master') {
            // sh "php artisan jwt:secret --force"
         }
              }
-         stage('test') {
+        stage('test') {
             // Run any testing suites
             sh "./vendor/bin/phpunit"
         }
-          stage('push to matser') {
+        stage('push to matser') {
           checkout([$class: 'GitSCM',
               branches: [[name: '*/master']],
               doGenerateSubmoduleConfigurations: false,
@@ -26,10 +26,10 @@ node('master') {
               submoduleCfg: [],
               userRemoteConfigs: [[]]
           ])
-          sh 'git tag -a tagName -m "Your tag comment"'
-          sh 'git merge development'
-          sh 'git commit -am "Merged develop branch to master'
-          sh "git push origin master"
+            sh 'git tag -a tagName -m "Your tag comment"'
+            sh 'git merge development'
+            sh 'git commit -am "Merged develop branch to master'
+            sh "git push origin master"
              }
 
         stage('quality') {
@@ -87,6 +87,6 @@ def notifyBuild(String buildStatus = 'STARTED') {
       subject: subject,
       body: details,
       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-      
+
     )
 }
