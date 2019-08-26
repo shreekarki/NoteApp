@@ -4,13 +4,14 @@ node('master') {
         notifyBuild('STARTED')
         stage('setup') {
             // Checkout the app at the given commit sha from the webhook
-            checkout([$class: 'GitSCM',
-                         branches: [[name: '*/development']],
-                         doGenerateSubmoduleConfigurations: false,
-                         extensions: [],
-                         submoduleCfg: [],
-                         userRemoteConfigs: [[]]
-                     ])
+            checkout scm
+//            checkout([$class: 'GitSCM',
+//                          branches: [[name: '*/development']],
+//                          doGenerateSubmoduleConfigurations: false,
+//                          extensions: [],
+//                          submoduleCfg: [],
+//                          userRemoteConfigs: [[]]
+//                      ])
             // Just added the change
             // Install dependencies, create a new .env file and generate a new key, just for testing
             sh "composer install --no-progress --no-suggest --prefer-dist"
