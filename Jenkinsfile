@@ -1,4 +1,3 @@
-
 node('master') {
     try {
         notifyBuild('STARTED')
@@ -18,6 +17,7 @@ node('master') {
         }
         stage('quality') {
             sh "./vendor/bin/phpcs"
+            // Just to check a successful build
           //  sh "./vendor/bin/phpmd"
         }
         stage ('continuous delivery') {
