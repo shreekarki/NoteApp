@@ -23,6 +23,13 @@ node('master') {
             // Run any testing suites
             sh "./vendor/bin/phpunit"
         }
+        stage('quality') {
+                    sh "./vendor/bin/phpcs"
+                    sh "./vendor/bin/phpmd"
+        }
+
+        stage('create pr') {
+        }
 
 //         stage('push to master') {
 //           checkout([$class: 'GitSCM',
@@ -38,10 +45,7 @@ node('master') {
 //             sh "git push origin master"
 //         }
 
-        stage('quality') {
-            sh "./vendor/bin/phpcs"
-            sh "./vendor/bin/phpmd"
-        }
+
 
         stage('deploy') {
             // If we had ansible installed on the server, setup to run an ansible playbook
@@ -83,15 +87,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
   }
 
   // Send notifications
-   slackSend channel: '#general',
+  slackSend channel: '#general',
              color: colorCode,
              message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
-
-
-  emailext(
-      subject: subject,
-      body: details,
-      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-
-    )
 }
