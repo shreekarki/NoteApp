@@ -18,25 +18,25 @@ node('master') {
             // Run any testing suites
             sh "./vendor/bin/phpunit"
         }
-        stage('push to matser') {
-          checkout([$class: 'GitSCM',
-              branches: [[name: '*/master']],
-              doGenerateSubmoduleConfigurations: false,
-              extensions: [],
-              submoduleCfg: [],
-              userRemoteConfigs: [[]]
-          ])
-            sh 'git tag -a tagName -m "Your tag comment"'
-            sh 'git merge development'
-            sh 'git commit -am "Merged develop branch to master'
-            sh "git push origin master"
-             }
+
+//         stage('push to master') {
+//           checkout([$class: 'GitSCM',
+//               branches: [[name: '*/master']],
+//               doGenerateSubmoduleConfigurations: false,
+//               extensions: [],
+//               submoduleCfg: [],
+//               userRemoteConfigs: [[]]
+//           ])
+//             sh 'git tag -a tagName -m "Your tag comment"'
+//             sh 'git merge development'
+//             sh 'git commit -am "Merged develop branch to master'
+//             sh "git push origin master"
+//         }
 
         stage('quality') {
             sh "./vendor/bin/phpcs"
             sh "./vendor/bin/phpmd"
         }
-
 
         stage('deploy') {
             // If we had ansible installed on the server, setup to run an ansible playbook
