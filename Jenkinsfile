@@ -19,7 +19,6 @@ node('master') {
             sh "php artisan key:generate --force"
            // sh "php artisan jwt:secret --force"
         }
-             }
         stage('test') {
             // Run any testing suites
             sh "./vendor/bin/phpunit"
