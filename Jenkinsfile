@@ -18,7 +18,7 @@ node('master') {
         }
         stage('quality') {
             sh "./vendor/bin/phpcs"
-            sh "./vendor/bin/phpmd"
+          //  sh "./vendor/bin/phpmd"
         }
         stage ('continuous delivery') {
          sh "echo 'WE ARE Delivering'"
