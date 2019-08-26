@@ -28,9 +28,6 @@ node('master') {
                     sh "./vendor/bin/phpmd"
         }
 
-        stage('create pr') {
-        }
-
 //         stage('push to master') {
 //           checkout([$class: 'GitSCM',
 //               branches: [[name: '*/master']],
