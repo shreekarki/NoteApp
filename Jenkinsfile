@@ -20,7 +20,7 @@ node('master') {
             sh "./vendor/bin/phpcs"
             sh "./vendor/bin/phpmd"
         }
-        stage ('cotinuous delivery') {
+        stage ('continuous delivery') {
          sh "echo 'WE ARE Delivering'"
         }
         stage('deploy') {

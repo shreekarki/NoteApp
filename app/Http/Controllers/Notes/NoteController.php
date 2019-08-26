@@ -33,7 +33,7 @@ class NoteController extends Controller
     {
         $note = Note::create([
             'title' => $request->title,
-            'content' => $request->content,
+           // 'content' => $request->content,
         ]);
 
         return response()->json([
@@ -51,7 +51,7 @@ class NoteController extends Controller
      */
     public function deleteNote($id)
     {
-        if(Note::destroy($id)) {
+        if (Note::destroy($id)) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'successfully deleted.'
@@ -69,7 +69,7 @@ class NoteController extends Controller
     {
         //update note
         $note = Note::where('id', $request);
-        if($note->update($request->all())) {
+        if ($note->update($request->all())) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Note successfully updated.'

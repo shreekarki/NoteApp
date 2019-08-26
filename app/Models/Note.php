@@ -14,7 +14,7 @@ class Note extends Model
      *
      * @var array
      */
-    protected $fillable = [
+    public $fillable = [
         'title', 'content',
         ];
 }
