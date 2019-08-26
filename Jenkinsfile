@@ -12,7 +12,7 @@ node('master') {
             sh "php artisan key:generate --force"
            // sh "php artisan jwt:secret --force"
         }
-         stage('test') {
+        stage('test') {
             // Run any testing suites
             sh "./vendor/bin/phpunit"
         }
@@ -20,7 +20,9 @@ node('master') {
             sh "./vendor/bin/phpcs"
             sh "./vendor/bin/phpmd"
         }
-
+        stage ('cotinuous delivery') {
+         sh "echo 'WE ARE Delivering'"
+        }
         stage('deploy') {
             // If we had ansible installed on the server, setup to run an ansible playbook
             // sh "ansible-playbook -i ./ansible/hosts ./ansible/deploy.yml"
@@ -59,7 +61,6 @@ def notifyBuild(String buildStatus = 'STARTED') {
     color = 'RED'
     colorCode = '#FF0000'
   }
-
   // Send notifications
    slackSend channel: '#general',
              color: colorCode,
