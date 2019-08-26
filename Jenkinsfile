@@ -5,6 +5,14 @@ node('master') {
         stage('setup') {
             // Checkout the app at the given commit sha from the webhook
             checkout scm
+//            checkout([$class: 'GitSCM',
+//                          branches: [[name: '*/development']],
+//                          doGenerateSubmoduleConfigurations: false,
+//                          extensions: [],
+//                          submoduleCfg: [],
+//                          userRemoteConfigs: [[]]
+//                      ])
+            // Just added the change
             // Install dependencies, create a new .env file and generate a new key, just for testing
             sh "composer install --no-progress --no-suggest --prefer-dist"
             sh "touch -a database/testing.sqlite"
@@ -12,14 +20,30 @@ node('master') {
             sh "php artisan key:generate --force"
            // sh "php artisan jwt:secret --force"
         }
-         stage('test') {
+        stage('test') {
             // Run any testing suites
             sh "./vendor/bin/phpunit"
         }
         stage('quality') {
-            sh "./vendor/bin/phpcs"
-            sh "./vendor/bin/phpmd"
+                    sh "./vendor/bin/phpcs"
+                    sh "./vendor/bin/phpmd"
         }
+
+//         stage('push to master') {
+//           checkout([$class: 'GitSCM',
+//               branches: [[name: '*/master']],
+//               doGenerateSubmoduleConfigurations: false,
+//               extensions: [],
+//               submoduleCfg: [],
+//               userRemoteConfigs: [[]]
+//           ])
+//             sh 'git tag -a tagName -m "Your tag comment"'
+//             sh 'git merge development'
+//             sh 'git commit -am "Merged develop branch to master'
+//             sh "git push origin master"
+//         }
+
+
 
         stage('deploy') {
             // If we had ansible installed on the server, setup to run an ansible playbook
@@ -61,15 +85,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
   }
 
   // Send notifications
-   slackSend channel: '#general',
+  slackSend channel: '#general',
              color: colorCode,
              message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
-
-
-  emailext(
-      subject: subject,
-      body: details,
-      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-      
-    )
 }
