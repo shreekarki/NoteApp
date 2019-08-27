@@ -21,8 +21,8 @@ node('master') {
           //  sh "./vendor/bin/phpmd"
         }
         stage ('continuous delivery') {
-         input message: 'Finished cheking the PR proceed to merging to staging branch? (Click "Proceed" to continue)'
-         sh "echo 'WE ARE Delivering'"
+            input message: 'Finished cheking the PR proceed to merging to staging branch? (Click "Proceed" to continue)'
+           sh "echo 'WE ARE Delivering'"
         }
         stage('deploy') {
             input message: 'Finished using the web site? (Click "Proceed" to continue)'
@@ -40,6 +40,8 @@ node('master') {
   }
 }
 
+
+// Just added a comment for test purpose
 def notifyBuild(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus =  buildStatus ?: 'SUCCESSFUL'
